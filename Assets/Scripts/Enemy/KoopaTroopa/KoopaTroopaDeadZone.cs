@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class KoopaTroopaDeadZone : EnemyDeadZone
 {
+    private KoopaTroopaStatus status;
+    private void Start()
+    {
+        status = gameObject.GetComponentInParent<KoopaTroopaStatus>();
+    }
     private new void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.CompareTag("Player's Feet"))
+        if(collision.transform.CompareTag("Player's Feet") && status.isNormalState())
         {
-            gameObject.GetComponentInParent<KoopaTroopaStatus>().changeNormalState();
+            status.changeNormalState();
         }
     }
 }

@@ -29,6 +29,18 @@ public class EnemyMovement : MonoBehaviour
     public void changeSide()
     {
         facingRight = !facingRight;
+        changeFace();
+    }
+
+    public void changeSide(bool isRightSide)
+    {
+        facingRight = isRightSide;
+        changeFace();
+    }
+
+    private void changeFace()
+    {
+        //change face of sprite in this function
     }
 
     public bool isFacingRight()
