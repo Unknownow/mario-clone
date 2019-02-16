@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemy\EnemyDeadZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemy\FlipFace.cs" />
     <Compile Include="Assets\Scripts\Enemy\KoopaTroopa\KoopaTroopaDeadZone.cs" />
     <Compile Include="Assets\Scripts\Enemy\KoopaTroopa\KoopaTroopaMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy\KoopaTroopa\KoopaTroopaStatus.cs" />

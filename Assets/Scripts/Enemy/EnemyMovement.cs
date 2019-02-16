@@ -25,22 +25,15 @@ public class EnemyMovement : MonoBehaviour
         else
             transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
-
+    
     public void changeSide()
     {
         facingRight = !facingRight;
-        changeFace();
     }
 
     public void changeSide(bool isRightSide)
     {
         facingRight = isRightSide;
-        changeFace();
-    }
-
-    private void changeFace()
-    {
-        //change face of sprite in this function
     }
 
     public bool isFacingRight()
