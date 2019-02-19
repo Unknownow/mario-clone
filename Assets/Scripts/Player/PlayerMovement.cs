@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 10;
-    public float jumpForce = 10;
+    public float moveSpeed = 10f;
+    public float jumpForce = 10f;
     private Rigidbody2D rb2d;
     private bool isFacingRight = true;
-    private bool isGrounded = true;
+    public bool isGrounded = true;
+
+    public float jumpGravityScale = 2f;
+    public float fallGravityScale = 2f;
 
     private GameObject playerFeet;
     
@@ -20,10 +23,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapPoint(playerFeet.transform.position, LayerMask.GetMask("Ground"));
-        playerMove();
+        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, 2f, LayerMask.GetMask("Ground"));
+        playerMoveVelocityIncrease();
+        jumpControl();
+        if (isGrounded)
+        {
+            playerJump();
+        }
     }
 
 
@@ -31,13 +39,13 @@ public class PlayerMovement : MonoBehaviour
     protected void playerMove()
     {
         int movePoint = 0;
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             movePoint = 1;
             if (!isFacingRight)
                 flipFace();
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             movePoint = -1;
             if (isFacingRight)
@@ -47,22 +55,32 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //move with velocity decrease/increase by time in x cordinate
-    protected void playerMoveWithDelayed()
+    protected void playerMoveVelocityIncrease()
     {
-        float movePoint = Input.GetAxis("Horizontal");
-        rb2d.velocity = new Vector2(movePoint * moveSpeed, rb2d.velocity.y);
+        float move = Input.GetAxis("Horizontal");
+        if (isFacingRight && move < 0) flipFace();
+        else if (!isFacingRight && move > 0) flipFace();
+        rb2d.position += Vector2.right * move * Time.deltaTime * moveSpeed;
     }
 
     protected void playerJump()
     {
-        Debug.Log("Jump!");
-        float jumpPoint = Input.GetAxis("Vertical");
-        rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce * jumpPoint);
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb2d.velocity = Vector2.up * jumpForce;
+        }
     }
 
-    protected void playerFall()
+    protected void jumpControl()
     {
-
+        if (rb2d.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rb2d.velocity += Vector2.up * jumpGravityScale * Physics2D.gravity.y * Time.deltaTime;
+        }
+        else if (rb2d.velocity.y < 0)
+        {
+            rb2d.velocity += Vector2.up * fallGravityScale * Physics2D.gravity.y * Time.deltaTime;
+        }
     }
 
 

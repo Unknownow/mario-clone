@@ -356,8 +356,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dfe5c018724d8b4d98784b0ad0e1c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
-  jumpForce: 100
+  moveSpeed: 40
+  jumpForce: 50
+  isGrounded: 1
+  jumpGravityScale: 20
+  fallGravityScale: 15
 --- !u!61 &777585567
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -467,7 +470,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &847046415
 GameObject:
   m_ObjectHideFlags: 0
