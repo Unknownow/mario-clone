@@ -8,12 +8,12 @@ public class EnemyDeadZone : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player's Feet"))
         {
+            Debug.Log("Died");
             deadFunction();
-            Destroy(gameObject);
         }
     }
-    protected void deadFunction()
+    protected virtual void deadFunction()
     {
-        // This will play the dead animation.
+
     }
 }

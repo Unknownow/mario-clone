@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float jumpForce = 10f;
-    private Rigidbody2D rb2d;
-    private bool isFacingRight = true;
-    public bool isGrounded = true;
+    
+    private Rigidbody2D rb2d;   //rigidbody of player
+    private bool isFacingRight = true; //true if player is facing right
+    private bool isGrounded = true; //true if player is on the ground
+    private GameObject playerFeet; //player's feet
+
 
     public float jumpGravityScale = 2f;
     public float fallGravityScale = 2f;
-
-    private GameObject playerFeet;
+    public float moveSpeed = 10f;
+    public float jumpForce = 10f;
+    
     
 
     private void Start()
@@ -27,11 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, 2f, LayerMask.GetMask("Ground"));
         playerMoveVelocityIncrease();
-        jumpControl();
-        if (isGrounded)
-        {
-            playerJump();
-        }
+        playerJump();
+
     }
 
 
@@ -65,10 +64,11 @@ public class PlayerMovement : MonoBehaviour
 
     protected void playerJump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb2d.velocity = Vector2.up * jumpForce;
         }
+        jumpControl();
     }
 
     protected void jumpControl()
