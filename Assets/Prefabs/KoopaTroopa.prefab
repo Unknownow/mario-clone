@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 758996660641231208}
   m_Layer: 0
   m_Name: Dead Zone
-  m_TagString: Untagged
+  m_TagString: Player's Feet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.091929436, y: -0.18924522}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 758996662174012594}
   m_Layer: 0
   m_Name: KoopaTroopa
-  m_TagString: Enemy
+  m_TagString: Koopa Troopa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,3 +259,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  destroyable: 0

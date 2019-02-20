@@ -7,6 +7,8 @@ TagManager:
   - Pillar
   - Player's Feet
   - Enemy
+  - Koopa Troopa
+  - Bowling
   layers:
   - Default
   - TransparentFX

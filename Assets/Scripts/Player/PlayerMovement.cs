@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody2D rb2d;   //rigidbody of player
     private bool isFacingRight = true; //true if player is facing right
-    private bool isGrounded = true; //true if player is on the ground
+    public bool isGrounded = true; //true if player is on the ground
+    public bool isRunning = false;
+    public bool isAlive = true;
     private GameObject playerFeet; //player's feet
 
 
@@ -22,12 +24,16 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         playerFeet = transform.GetChild(0).gameObject;
+        isRunning = false;
+        isAlive = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, 2f, LayerMask.GetMask("Ground"));
+        if (!isAlive)
+            return;
+        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, .5f, LayerMask.GetMask("Ground"));
         playerMoveVelocityIncrease();
         playerJump();
 
@@ -50,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
             if (isFacingRight)
                 flipFace();
         }
+        else
+        {
+        }
         rb2d.velocity = new Vector2(movePoint * moveSpeed , rb2d.velocity.y);
     }
 
@@ -59,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
         if (isFacingRight && move < 0) flipFace();
         else if (!isFacingRight && move > 0) flipFace();
+        if (move != 0)
+        {
+            isRunning = true;
+        }
+        else
+            isRunning = false;
         rb2d.position += Vector2.right * move * Time.deltaTime * moveSpeed;
     }
 
@@ -66,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            isGrounded = !isGrounded;
             rb2d.velocity = Vector2.up * jumpForce;
         }
         jumpControl();
@@ -89,5 +105,13 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Rotate(Vector2.up, 180);
         isFacingRight = !isFacingRight;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            isAlive = false;
+        }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Enemy\KoopaTroopa\KoopaTroopaStatus.cs" />
     <Compile Include="Assets\Scripts\Enemy\Woompa\WoompaMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy\Woompa\WoopaDeadZone.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Unity/Mario Clone/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

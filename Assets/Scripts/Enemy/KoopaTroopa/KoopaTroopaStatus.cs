@@ -31,6 +31,7 @@ public class KoopaTroopaStatus : MonoBehaviour
             if(changeStateCountdown <= 0)
             {
                 changeStateCountdown = maxTimeChangeState;
+                gameObject.tag = "Enemy";
                 changeNormalState();
             }
         }
@@ -58,12 +59,22 @@ public class KoopaTroopaStatus : MonoBehaviour
             {
                 movementController.speed = maxSpeed * 4;
                 bowlingState = true;
+                Vector2 forceDirection = Vector2.right;
                 if (collision.transform.position.x > transform.position.x)
                     movementController.changeSide(false);
                 else
+                {
                     movementController.changeSide(true);
+                }
+                StartCoroutine(wait());
             }
         } 
+    }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(.5f);
+        gameObject.tag = "Enemy";
     }
 
     public bool isNormalState()
