@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public float speed = 2f;
-    protected bool facingRight = true;
+    public bool facingRight = true;
     protected Transform face;
     protected bool isTurnaroud = false;
     protected bool isAlive = true;
     public bool destroyable = false;
+    public bool isKoopa = false;
 
     protected void Start()
     {
@@ -68,5 +69,13 @@ public class EnemyMovement : MonoBehaviour
     public void die()
     {
         isAlive = false;
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Border"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

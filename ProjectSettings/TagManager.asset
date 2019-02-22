@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Koopa Troopa
   - Bowling
+  - Fabulous
+  - Border
   layers:
   - Default
   - TransparentFX

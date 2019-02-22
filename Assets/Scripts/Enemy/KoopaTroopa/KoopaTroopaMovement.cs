@@ -5,6 +5,7 @@ using UnityEngine;
 public class KoopaTroopaMovement : EnemyMovement
 {
     private KoopaTroopaStatus status;
+    
     private new void Start()
     {
         face = transform.GetChild(1);
@@ -12,6 +13,7 @@ public class KoopaTroopaMovement : EnemyMovement
         isAlive = true;
         facingRight = true;
         status = gameObject.GetComponentInParent<KoopaTroopaStatus>();
+        
     }
 
     private void Update()

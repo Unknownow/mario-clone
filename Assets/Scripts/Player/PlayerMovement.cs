@@ -11,29 +11,70 @@ public class PlayerMovement : MonoBehaviour
     public bool isRunning = false;
     public bool isAlive = true;
     private GameObject playerFeet; //player's feet
-
-
+    private PlayerStatus status;
+    private float invicibleCountdown;
     public float jumpGravityScale = 2f;
     public float fallGravityScale = 2f;
     public float moveSpeed = 10f;
     public float jumpForce = 10f;
-    
+
+    private bool changeBigger = false;
+    private bool changeSmaller = false;
+    private Vector3 currentScale;
     
 
     private void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         playerFeet = transform.GetChild(0).gameObject;
+        status = gameObject.GetComponent<PlayerStatus>();
+        changeBigger = false;
+        changeSmaller = false;
         isRunning = false;
         isAlive = true;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (!isAlive)
             return;
-        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, .5f, LayerMask.GetMask("Ground"));
+        if (changeBigger)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, currentScale * 2, 5 * Time.deltaTime);
+            if(currentScale * 2 == transform.localScale)
+            {
+                changeBigger = false;
+            }
+        }
+        else if (changeSmaller)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, currentScale / 2, 5 * Time.deltaTime);
+            if (currentScale / 2 == transform.localScale)
+            {
+                changeSmaller = false;
+            }
+        }
+
+        if (status.isInvicible)
+        {
+            invicibleCountdown -= Time.deltaTime;
+            if (invicibleCountdown <= 0)
+            {
+                status.isInvicible = false;
+                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else if (status.isFabulous)
+        {
+            invicibleCountdown -= Time.deltaTime;
+            if (invicibleCountdown <= 0)
+            {
+                status.isFabulous = false;
+                gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, .9f, LayerMask.GetMask("Ground"));
         playerMoveVelocityIncrease();
         playerJump();
 
@@ -55,9 +96,6 @@ public class PlayerMovement : MonoBehaviour
             movePoint = -1;
             if (isFacingRight)
                 flipFace();
-        }
-        else
-        {
         }
         rb2d.velocity = new Vector2(movePoint * moveSpeed , rb2d.velocity.y);
     }
@@ -109,9 +147,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (status.isInvicible)
+            return;
         if (collision.transform.CompareTag("Enemy"))
         {
+            if (status.isFabulous)
+            {
+                collision.gameObject.GetComponent<Collider2D>().isTrigger = true;
+                collision.gameObject.GetComponent<EnemyMovement>().enabled = false;
+                collision.transform.Rotate(0, 0, 180);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(1, 2) * 5, ForceMode2D.Impulse);
+                if (collision.gameObject.GetComponent<EnemyMovement>().isKoopa)
+                {
+                    collision.gameObject.GetComponent<KoopaTroopaStatus>().anim.SetBool("isBowling", true);
+                }
+                return;
+            }
+            if (status.isBigger)
+            {
+                status.isBigger = false;
+                status.isInvicible = true;
+                invicibleCountdown = 2f;
+                changeSmaller = true;
+                currentScale = transform.localScale;
+                return;
+            }
             isAlive = false;
         }
+    }
+
+    public void changeToBigger()
+    {
+        changeBigger = true;
+        currentScale = transform.localScale;
+    }
+
+    public void makeFabulous()
+    {
+        status.isFabulous = true;
+        invicibleCountdown = 6f;
     }
 }

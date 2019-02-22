@@ -11,6 +11,8 @@ public class KoopaTroopaStatus : MonoBehaviour
     public float changeStateCountdown;
     private float maxSpeed;                 //bien luu toc do
 
+    public Animator anim;
+
     private KoopaTroopaMovement movementController;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class KoopaTroopaStatus : MonoBehaviour
         changeStateCountdown = maxTimeChangeState;
         movementController = gameObject.GetComponentInParent<KoopaTroopaMovement>();
         maxSpeed = movementController.speed;
+        anim = transform.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class KoopaTroopaStatus : MonoBehaviour
                 changeStateCountdown = maxTimeChangeState;
                 gameObject.tag = "Enemy";
                 changeNormalState();
+                anim.SetBool("isBowling", false);
             }
         }
     }

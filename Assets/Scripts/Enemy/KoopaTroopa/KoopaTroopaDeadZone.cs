@@ -11,13 +11,17 @@ public class KoopaTroopaDeadZone : EnemyDeadZone
     }
     private new void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.CompareTag("Player's Feet") && status.isNormalState())
+        if (collision.transform.CompareTag("Player's Feet"))
         {
-            status.changeNormalState();
-        }
-        transform.parent.gameObject.tag = "Bowling";
-        Rigidbody2D temp = collision.transform.GetComponentInParent<Rigidbody2D>();
-        temp.velocity = new Vector2(temp.velocity.x, 0);
-        temp.AddForce(Vector2.up * 50, ForceMode2D.Impulse);
+            if (status.isNormalState())
+            {
+                status.changeNormalState();
+                transform.parent.gameObject.tag = "Bowling";
+                gameObject.GetComponentInParent<KoopaTroopaStatus>().anim.SetBool("isBowling", true);
+            }
+            Rigidbody2D temp = collision.transform.GetComponentInParent<Rigidbody2D>();
+            temp.velocity = new Vector2(temp.velocity.x, 0);
+            temp.AddForce(Vector2.up * 50, ForceMode2D.Impulse);
+        }  
     }
 }

@@ -14,7 +14,6 @@ public class WoopaDeadZone : EnemyDeadZone
 
     protected override void deadFunction()
     {
-        Debug.Log("Child!");
         woompaAnimator.SetBool("isAlive", false);
         transform.GetComponentInParent<WoompaMovement>().speed = 0;
         transform.GetComponentInParent<WoompaMovement>().die();
