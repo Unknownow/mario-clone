@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().enabled = true;
             }
         }
-        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, .9f, LayerMask.GetMask("Ground"));
+        isGrounded = Physics2D.OverlapCircle(playerFeet.transform.position, 1f, LayerMask.GetMask("Ground"));
         playerMoveVelocityIncrease();
         playerJump();
 
