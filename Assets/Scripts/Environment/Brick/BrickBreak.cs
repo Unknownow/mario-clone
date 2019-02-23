@@ -9,7 +9,7 @@ public class BrickBreak : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        go = transform.root.gameObject;
+        go = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -22,8 +22,8 @@ public class BrickBreak : MonoBehaviour
 	{
 		if(collision.transform.CompareTag("Player"))
 		{
-            Debug.Log("1");
-            go.GetComponent<BrickBreakAnimationController>().isHit = true;
+            if(collision.GetComponent<PlayerStatus>().isBigger)
+                go.GetComponent<BrickBreakAnimationController>().isHit = true;
 		}
 	}
 }

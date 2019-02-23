@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 479072392}
+  - component: {fileID: 1674871530}
+  - component: {fileID: 1674871529}
   m_Layer: 0
   m_Name: Face
   m_TagString: Untagged
@@ -24,12 +26,50 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479072391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.096, y: 0, z: 0}
+  m_LocalPosition: {x: 0.121, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 758996662174012596}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1674871530
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479072391}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0012792666, y: -0.0056676716}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.045674484, y: 0.04404345}
+  m_EdgeRadius: 0
+--- !u!114 &1674871529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479072391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb84f46908e764649b6b839421a4a25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &758996660641231211
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +155,7 @@ GameObject:
   - component: {fileID: 758996662174012593}
   - component: {fileID: 758996662174012594}
   - component: {fileID: 1367411156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: KoopaTroopa
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -245,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd640de726e62eb4d824db09ff8b843a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bowlingState: 0
   maxTimeChangeState: 2
   changeStateCountdown: 0
   anim: {fileID: 0}

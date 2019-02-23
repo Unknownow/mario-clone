@@ -13,9 +13,15 @@ public class PowerUpController : EnemyMovement
             return;
         }
         if (collision.transform.CompareTag("Player"))
-        {
+        {  
             if (isMushroom)
             {
+                if (collision.GetComponent<PlayerStatus>().isBigger)
+                {
+                    Destroy(this.gameObject);
+                    return;
+                }
+                    
                 collision.gameObject.GetComponent<PlayerMovement>().changeToBigger();
                 collision.gameObject.GetComponent<PlayerStatus>().isBigger = true;
             }
@@ -30,5 +36,16 @@ public class PowerUpController : EnemyMovement
             Destroy(this.gameObject);
         }
         
+    }
+
+    protected new void Start()
+    {
+        face = transform.GetChild(1);
+        isTurnaroud = false;
+        isAlive = true;
+        facingRight = true;
+        destroyable = false;
+        isActivated = true;
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 }

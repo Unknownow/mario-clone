@@ -11,6 +11,8 @@ TagManager:
   - Bowling
   - Fabulous
   - Border
+  - GameManager
+  - Enemy2
   layers:
   - Default
   - TransparentFX

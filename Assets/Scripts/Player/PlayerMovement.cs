@@ -41,16 +41,16 @@ public class PlayerMovement : MonoBehaviour
             return;
         if (changeBigger)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, currentScale * 2, 5 * Time.deltaTime);
-            if(currentScale * 2 == transform.localScale)
+            transform.localScale = Vector3.Lerp(transform.localScale, currentScale * 1.3f, 5 * Time.deltaTime);
+            if(currentScale * 1.3f == transform.localScale)
             {
                 changeBigger = false;
             }
         }
         else if (changeSmaller)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, currentScale / 2, 5 * Time.deltaTime);
-            if (currentScale / 2 == transform.localScale)
+            transform.localScale = Vector3.Lerp(transform.localScale, currentScale / 1.3f, 5 * Time.deltaTime);
+            if (currentScale / 1.3f == transform.localScale)
             {
                 changeSmaller = false;
             }
@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (status.isInvicible)
             return;
-        if (collision.transform.CompareTag("Enemy"))
+        if (collision.transform.CompareTag("Enemy") || collision.transform.CompareTag("Enemy2"))
         {
             if (status.isFabulous)
             {

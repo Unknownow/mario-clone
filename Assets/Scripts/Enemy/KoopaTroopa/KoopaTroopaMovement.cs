@@ -13,7 +13,8 @@ public class KoopaTroopaMovement : EnemyMovement
         isAlive = true;
         facingRight = true;
         status = gameObject.GetComponentInParent<KoopaTroopaStatus>();
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+
     }
 
     private void Update()
@@ -21,4 +22,6 @@ public class KoopaTroopaMovement : EnemyMovement
         if (status.isNormalState() || status.isBowlingState()) 
             movementController();
     }
+
+    
 }

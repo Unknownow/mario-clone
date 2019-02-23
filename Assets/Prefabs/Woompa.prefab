@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1285759574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.228, y: 0, z: 0}
+  m_LocalPosition: {x: 0.287, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7142786405205706269}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 277796901}
   m_Layer: 0
   m_Name: Dead Zone
-  m_TagString: Player's Feet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 8788626814805908609}
   - component: {fileID: 1834378034}
   - component: {fileID: 7142786405205706271}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Woompa
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -265,4 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  facingRight: 1
   destroyable: 0
+  isKoopa: 0

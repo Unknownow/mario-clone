@@ -6,7 +6,7 @@ public class KoopaTroopaStatus : MonoBehaviour
 {
     
     private bool normalState = true;        //check xem co phai trang thai binh thuong hay ko
-    private bool bowlingState = false;      //check xem co dang phai trong trang thai bowling ko
+    public bool bowlingState = false;      //check xem co dang phai trong trang thai bowling ko
     public int maxTimeChangeState = 5;      //thoi gian toi da de chuyen trang thai tu
     public float changeStateCountdown;
     private float maxSpeed;                 //bien luu toc do
@@ -66,7 +66,7 @@ public class KoopaTroopaStatus : MonoBehaviour
                 Vector2 forceDirection = Vector2.right;
                 if (collision.transform.position.x > transform.position.x)
                     movementController.changeSide(false);
-                else
+                else if(collision.transform.position.x < transform.position.x)
                 {
                     movementController.changeSide(true);
                 }
@@ -78,7 +78,7 @@ public class KoopaTroopaStatus : MonoBehaviour
     IEnumerator wait()
     {
         yield return new WaitForSeconds(.5f);
-        gameObject.tag = "Enemy";
+        gameObject.tag = "Enemy2";
     }
 
     public bool isNormalState()

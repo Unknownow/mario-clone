@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class QMBoxHit : MonoBehaviour
 {
-    GameObject go;
+    public GameObject go;
 
     // Start is called before the first frame update
     void Start()
     {
-        go = transform.root.gameObject;
+        go = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -24,11 +24,8 @@ public class QMBoxHit : MonoBehaviour
         {
             if (go.GetComponent<QMBoxController>().hasMushroom)
             {
-                if (!collision.gameObject.GetComponent<PlayerStatus>().isBigger)
-                {
-                    go.GetComponent<QMBoxController>().spawnMushroom = true;
-                    return;
-                }
+                go.GetComponent<QMBoxController>().spawnMushroom = true; 
+                return;
             }
             go.GetComponent<QMBoxController>().spawnStar = true;
         }
